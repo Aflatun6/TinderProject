@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DAOuser implements DAO<User> {
+public class DAOlikeduser implements DAO<User> {
     private static List<User> users;
 
-    public DAOuser() {
+    public DAOlikeduser() {
         users = new ArrayList<>();
     }
 

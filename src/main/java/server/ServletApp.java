@@ -10,6 +10,7 @@ public class ServletApp {
         ServletContextHandler handler = new ServletContextHandler();
         TemplateEngine engine = TemplateEngine.folder("./templates");
         handler.addServlet(new ServletHolder(new UsersServlet(engine)),"/users/*");
+        handler.addServlet(new ServletHolder(new LikedServlet(engine)),"/liked/*");
         handler.addServlet(new ServletHolder(new StaticServlet()),"/static/*");
         server.setHandler(handler);
         server.start();

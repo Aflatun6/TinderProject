@@ -1,10 +1,16 @@
 package dao;
 
+import entity.User;
+
 import java.util.List;
-import java.util.Optional;
+
 
 public interface DAO<A> {
     List<A> getAll();
-    Optional<A> get(String name);
-    boolean delete(String name);
+
+    A get(String name);
+
+    boolean add(User user);
+
+    boolean delete(User user);
 }
