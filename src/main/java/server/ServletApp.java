@@ -11,6 +11,9 @@ public class ServletApp {
         TemplateEngine engine = TemplateEngine.folder("./templates");
         handler.addServlet(new ServletHolder(new UsersServlet(engine)),"/users/*");
         handler.addServlet(new ServletHolder(new LikedServlet(engine)),"/liked/*");
+        handler.addServlet(new ServletHolder(new MessagesServlet()),"/messages/*");
+        handler.addServlet(new ServletHolder(new LoginServlet()),"/login/*");
+        handler.addServlet(new ServletHolder(new SignUpServlet()),"/signUp/*");
         handler.addServlet(new ServletHolder(new StaticServlet()),"/static/*");
         server.setHandler(handler);
         server.start();

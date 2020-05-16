@@ -31,4 +31,5 @@ public class LikedServlet extends HttpServlet {
         data.put("users", likedUsers);
         engine.render("people-list.ftl", data, resp);
     }
+
 }

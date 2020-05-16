@@ -18,16 +18,16 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin">
+    <form class="form-signin" method="post">
         <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputName" class="sr-only">Name</label>
-        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required autofocus>
+        <input type="text" id="inputName" name="name" class="form-control" placeholder="Name" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        OR
-        <a href="signUp" class="btn btn-md btn-primary btn-block">Sign Up</a>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+        <label for="inputImageURL" class="sr-only">imageURL</label>
+        <input type="text" name="imageURL" id="inputImageURL" class="form-control" placeholder="imageURL" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
         <p class="mt-5 mb-3 text-muted">&copy; Tinder 2018</p>
     </form>
 

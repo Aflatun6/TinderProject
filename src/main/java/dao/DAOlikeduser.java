@@ -20,8 +20,9 @@ public class DAOlikeduser implements DAO<User> {
 
     @Override
     public User get(String name) {
-        return getAll().stream().filter(u -> u.getName().equals(name)).findFirst().orElse(new User("Nobody left bro!", "https://robohash.org/68.186.255.198.png"));
-    }
+//        return getAll().stream().filter(u -> u.getName().equals(name)).findFirst().orElse(new User(1,"Nobody left bro!", "https://robohash.org/68.186.255.198.png"));
+
+   return null; }
 
     @Override
     public boolean add(User user) {

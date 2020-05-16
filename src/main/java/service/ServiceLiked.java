@@ -14,6 +14,9 @@ public class ServiceLiked {
         return daOlikeduser.getAll();
     }
 
+    public boolean add(User user) {
+        return daOlikeduser.add(user);
+    }
 
 
 }

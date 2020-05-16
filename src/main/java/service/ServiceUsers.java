@@ -7,7 +7,7 @@ import entity.User;
 import java.util.List;
 
 
-public class Service {
+public class ServiceUsers {
     private final DAOuser daOuser = new DAOuser();
     private final DAOlikeduser daOlikeduser = new DAOlikeduser();
 
@@ -24,8 +24,9 @@ public class Service {
     }
 
     public boolean add(String name, String imageURL) {
-        User user = new User(name, imageURL);
-        return daOuser.add(user);
+//        User user = new User(1,name, imageURL);
+//        return daOuser.add(user);
+        return false;
     }
 
     public User findFirst() {

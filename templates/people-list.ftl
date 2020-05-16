@@ -41,7 +41,7 @@
                                         ${user.name}
                                     </td>
                                     <td class="align-middle">
-                                        Builder Sales Agent
+                                            <a class="btn btn-primary btn-block" href="messages/${user.id}" name="message">send message</a>
                                     </td>
                                     <td class="align-middle">
                                         Last Login: 6/10/2017<br><small class="text-muted">5 days ago</small>

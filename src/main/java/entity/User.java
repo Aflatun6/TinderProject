@@ -8,14 +8,16 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class User {
+    private final int id;
     private final String name;
     private final String imageURL;
-    private final int id;
-    private static int ids = 0;
+    private final String password;
 
-    public User(String name, String imageURL) {
+
+    public User(int id, String name, String imageURL, String password) {
+        this.id = id;
         this.name = name;
         this.imageURL = imageURL;
-        this.id = ++ids;
+        this.password = password;
     }
 }
