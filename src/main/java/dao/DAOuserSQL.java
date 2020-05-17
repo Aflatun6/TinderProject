@@ -1,6 +1,6 @@
 package dao;
 
-import db.DBApp;
+
 import entity.User;
 
 import java.sql.*;
@@ -15,25 +15,35 @@ public class DAOuserSQL {
     private static final String URL = "jdbc:postgresql://ec2-54-228-251-117.eu-west-1.compute.amazonaws.com:5432/d1h69thpfb2nha";
     private static Connection conn;
 
-    private static List<User> users;
+    List<User> users;
+    List<User> likedUsers;
 
     public DAOuserSQL() throws SQLException {
         conn = DriverManager.getConnection(URL, NAME, PASSWORD);
         users = new ArrayList<>();
+        likedUsers = new ArrayList<>();
     }
 
-    //    @Override
-//    public List<User> getAll() throws SQLException {
-//        String sql = "select u.id,u.name, u.imageURL from users u";
-//        ResultSet resultSet = DBApp.take(sql);
-//        while (resultSet.next()) {
-//            users.add(new User(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("imageURL")));
-//        }
-//        return users;
-//    }
+    public ResultSet get(int id) throws SQLException {
+        String sql = "select * from users where id = ?";
+        PreparedStatement pr = conn.prepareStatement(sql);
+        pr.setInt(1, id);
+        return pr.executeQuery();
+    }
 
+    public ResultSet getAll() throws SQLException {
+        String sql = "select * from users";
+        PreparedStatement pr = conn.prepareStatement(sql);
+        return pr.executeQuery();
+    }
 
-    //    @Override
+    public ResultSet getLiked(int id) throws SQLException {
+        String sql = "select whom from likes where who = ?";
+        PreparedStatement pr = conn.prepareStatement(sql);
+        pr.setInt(1, id);
+        return pr.executeQuery();
+    }
+
     public void add(String name, String imageURL, String password) throws SQLException {
         String sql = "insert into public.users (id,name,imageurl,password) values (default,?, ?, ?)";
         PreparedStatement pr = conn.prepareStatement(sql);
@@ -43,10 +53,19 @@ public class DAOuserSQL {
         pr.executeUpdate();
     }
 
-    public boolean exist(String name) throws SQLException {
-        String sql = "select u.name from users u where name = " + name;
+    public ResultSet exist(String name, String password) throws SQLException {
+        String sql = "select * from users u where name = ? and password = ?";
         PreparedStatement pr = conn.prepareStatement(sql);
-        ResultSet rs = pr.executeQuery();
-        return rs.getFetchSize() == 1;
+        pr.setString(1, name);
+        pr.setString(2, password);
+        return pr.executeQuery();
+    }
+
+    public void addLiked(int who, int whom) throws SQLException {
+        String sql = "insert into likes (who,whom) values (?,?)";
+        PreparedStatement pr = conn.prepareStatement(sql);
+        pr.setInt(1, who);
+        pr.setInt(2, whom);
+        pr.executeUpdate();
     }
 }

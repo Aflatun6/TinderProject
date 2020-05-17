@@ -38,6 +38,6 @@ public class SignUpServlet extends HttpServlet {
         Cookie cookie = new Cookie(name, password);
         resp.addCookie(cookie);
         service.add(name,imageURL,password);
-        resp.sendRedirect("/users");
+        resp.sendRedirect("/login");
     }
 }
