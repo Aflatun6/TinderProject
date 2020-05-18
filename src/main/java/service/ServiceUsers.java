@@ -1,11 +1,10 @@
 package service;
 
-import dao.DAOlikeduser;
-import dao.DAOuser;
+
 import dao.DAOuserSQL;
 import entity.User;
 
-import javax.servlet.http.Cookie;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class ServiceUsers {
     private DAOuserSQL dao;
     private List<User> users;
     private List<User> likedUsers;
-    private List<User> temporaryList;
+    private static List<User> temporaryList;
 
     public ServiceUsers() throws SQLException {
         dao = new DAOuserSQL();
@@ -37,10 +36,14 @@ public class ServiceUsers {
 
     private void doMath() throws SQLException {
         users.removeAll(likedUsers);
+        users.remove(currentUser);
     }
 
-    public void getLiked() throws SQLException {
-        initiateCurrentUser();
+    public List<User> getLiked(){
+        return likedUsers;
+    }
+
+    public void getLikedIds() throws SQLException {
         ResultSet likedIDs = dao.getLiked(currentUser.getId());
         while (likedIDs.next()) {
             likedUsers.add(initiateLikedUsers(dao.get(likedIDs.getInt("whom"))));
@@ -70,8 +73,9 @@ public class ServiceUsers {
         }
     }
 
-    public User findFirst(Cookie cookie) throws SQLException {
-        getLiked();
+    public User findFirst() throws SQLException {
+        initiateCurrentUser();
+        getLikedIds();
         getAll();
         if (users.size() > 0) {
             return users.remove(0);
@@ -79,12 +83,13 @@ public class ServiceUsers {
         return null;
     }
 
-    public void addTemp(User user) {
+    public static void addTemp(User user) {
         temporaryList.add(user);
     }
 
     public void fillUsers() {
         if (users.isEmpty()) {
+            System.out.println(temporaryList.size() + " = temp.size");
             users.addAll(temporaryList);
         }
         temporaryList.clear();

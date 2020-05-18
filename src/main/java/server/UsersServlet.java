@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class UsersServlet extends HttpServlet {
-    private ServiceUsers serviceUsers ;
+    private ServiceUsers serviceUsers;
     private User user;
     private final TemplateEngine engine;
 
@@ -25,7 +25,7 @@ public class UsersServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        user = serviceUsers.findFirst(req.getCookies()[0]);
+        user = serviceUsers.findFirst();
         if (user != null) {
             HashMap<String, Object> data = new HashMap<>();
             String name = user.getName();
