@@ -1,6 +1,7 @@
 package service;
 
 import dao.DAOuserSQL;
+import entity.CurrentState;
 import entity.User;
 
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 
 
 public class ServiceSigning {
-    public static User currentUser;
+    private CurrentState currentState = new CurrentState(1);
     DAOuserSQL dao;
 
     public ServiceSigning() throws SQLException {
@@ -22,21 +23,17 @@ public class ServiceSigning {
     public boolean exist(String name, String password) throws SQLException {
         ResultSet rs = dao.exist(name, password);
         initiateUser(rs);
-        return currentUser != null;
+        return currentState.getCurrentUser() != null;
     }
 
-    private static void initiateUser(ResultSet rs) throws SQLException {
+    private void initiateUser(ResultSet rs) throws SQLException {
         if (rs.next()) {
-            currentUser = new User(
+            currentState.setCurrentUser(new User(
                     rs.getInt("id"),
                     rs.getString("name"),
                     rs.getString("imageurl"),
                     rs.getString("password")
-            );
+            ));
         }
-    }
-
-    public static User getCurrentUser() {
-        return currentUser;
     }
 }

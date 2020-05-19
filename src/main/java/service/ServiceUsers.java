@@ -2,52 +2,59 @@ package service;
 
 
 import dao.DAOuserSQL;
+import entity.CurrentState;
 import entity.User;
 
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class ServiceUsers {
-    private static User currentUser;
+    private CurrentState currentState ;
     private DAOuserSQL dao;
-    private List<User> users;
-    private List<User> likedUsers;
-    private static List<User> temporaryList;
+    private int i = 0;
 
     public ServiceUsers() throws SQLException {
+        currentState = new CurrentState(1);
         dao = new DAOuserSQL();
-        users = new ArrayList<>();
-        likedUsers = new ArrayList<>();
-        temporaryList = new ArrayList<>();
     }
 
     public void getAll() throws SQLException {
-        initiateUsers(dao.getAll());
+        currentState.setUsers(makeUsers(dao.getAll()));
         doMath();
     }
 
-    private static void initiateCurrentUser() throws SQLException {
-        currentUser = ServiceSigning.getCurrentUser();
-    }
 
     private void doMath() throws SQLException {
-        users.removeAll(likedUsers);
-        users.remove(currentUser);
+        currentState.getUsers().removeAll(currentState.getLikedUsers());
+        currentState.getUsers().remove(currentState.getCurrentUser());
     }
 
-    public List<User> getLiked(){
-        return likedUsers;
+    public List<User> getLiked() throws SQLException {
+       return currentState.getLikedUsers();
     }
+
+//    public Set<Integer> getLikedIds() throws SQLException {
+//        ResultSet likedIDs = dao.getLiked(currentState.getCurrentUser().getId());
+//        Set<Integer> set = new HashSet<>();
+//        while(likedIDs.next()){
+//            set.add(likedIDs.getInt("whom"));
+//        }
+//        return set;
+//    }
 
     public void getLikedIds() throws SQLException {
-        ResultSet likedIDs = dao.getLiked(currentUser.getId());
+        ResultSet likedIDs = dao.getLiked(currentState.getCurrentUser().getId());
+        List<User> aa = new ArrayList<>();
         while (likedIDs.next()) {
-            likedUsers.add(initiateLikedUsers(dao.get(likedIDs.getInt("whom"))));
+            aa.add(initiateLikedUsers(dao.get(likedIDs.getInt("whom"))));
         }
+        currentState.setLikedUsers(aa);
     }
 
     private User initiateLikedUsers(ResultSet rs) throws SQLException {
@@ -62,40 +69,40 @@ public class ServiceUsers {
         return null;
     }
 
-    private void initiateUsers(ResultSet rs) throws SQLException {
+    private ArrayList<User> makeUsers(ResultSet rs) throws SQLException {
+        ArrayList<User> aa = new ArrayList<>();
         while (rs.next()) {
-            users.add(new User(
+            aa.add(new User(
                     rs.getInt("id"),
                     rs.getString("name"),
                     rs.getString("imageurl"),
                     rs.getString("password")
             ));
         }
+        return aa;
+    }
+
+    private void init() throws SQLException {
+        getLikedIds();
+        getAll();
     }
 
     public User findFirst() throws SQLException {
-        initiateCurrentUser();
-        getLikedIds();
-        getAll();
-        if (users.size() > 0) {
-            return users.remove(0);
+        if(i==0){
+            init();
+        }
+//        i++;
+        if(!currentState.getUsers().isEmpty()){
+            return currentState.getUsers().remove(0);
         }
         return null;
     }
 
-    public static void addTemp(User user) {
-        temporaryList.add(user);
-    }
-
-    public void fillUsers() {
-        if (users.isEmpty()) {
-            System.out.println(temporaryList.size() + " = temp.size");
-            users.addAll(temporaryList);
-        }
-        temporaryList.clear();
+    public void addAgain(User user) {
+        currentState.getUsers().add(user);
     }
 
     public void addLiked(User user) throws SQLException {
-        dao.addLiked(currentUser.getId(), user.getId());
+        dao.addLiked(currentState.getCurrentUser().getId(), user.getId());
     }
 }

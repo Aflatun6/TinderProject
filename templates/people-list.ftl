@@ -50,13 +50,12 @@
                             </#list>
                             </tbody>
                         </table>
-                        <a class="btn btn-outline-danger btn-block" href="/login">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <a class="btn btn-outline-danger align-self-center" href="/login">Logout</a>
 </div>
-
 </body>
 </html>
