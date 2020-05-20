@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class MessagesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pathInfo = req.getPathInfo();
+        String pathInfo = req.getPathInfo().split("/")[1];
         System.out.println(pathInfo);
         String collected = new BufferedReader(new FileReader(new File("templates/chat.html"))).lines().collect(Collectors.joining("\n"));
         try (PrintWriter w = resp.getWriter()) {
@@ -19,5 +19,8 @@ public class MessagesServlet extends HttpServlet {
         }
     }
 
-
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
 }

@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 
 public class ServiceSigning {
-    private CurrentState currentState = new CurrentState(1);
     DAOuserSQL dao;
 
     public ServiceSigning() throws SQLException {
@@ -23,12 +22,12 @@ public class ServiceSigning {
     public boolean exist(String name, String password) throws SQLException {
         ResultSet rs = dao.exist(name, password);
         initiateUser(rs);
-        return currentState.getCurrentUser() != null;
+        return CurrentState.getCurrentUser() != null;
     }
 
     private void initiateUser(ResultSet rs) throws SQLException {
         if (rs.next()) {
-            currentState.setCurrentUser(new User(
+            CurrentState.setCurrentUser(new User(
                     rs.getInt("id"),
                     rs.getString("name"),
                     rs.getString("imageurl"),

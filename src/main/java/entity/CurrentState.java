@@ -1,48 +1,36 @@
 package entity;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode
 public class CurrentState {
-    private final int i;
-    public static User currentUser;
-    public static List<User> users;
-    public static List<User> likedUsers;
+    private static User currentUser;
+    private static List<User> users;
+    private static List<User> likedUsers;
 
-    public CurrentState(int i) {
-        this.i = i;
-        users = new ArrayList<>();
-        likedUsers = new ArrayList<>();
-        currentUser = new User(0, null, null, null);
-    }
-
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public static void setCurrentUser(User currentUser) {
+        CurrentState.currentUser = currentUser;
     }
 
-    public List<User> getUsers() {
+    public static List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public static void setUsers(List<User> users) {
+        CurrentState.users = users;
     }
 
-    public List<User> getLikedUsers() {
+    public static List<User> getLikedUsers() {
         return likedUsers;
     }
 
-    public void setLikedUsers(List<User> likedUsers) {
-        this.likedUsers = likedUsers;
+    public static void setLikedUsers(List<User> likedUsers) {
+        CurrentState.likedUsers = likedUsers;
     }
+
 }

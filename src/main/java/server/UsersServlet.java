@@ -44,7 +44,9 @@ public class UsersServlet extends HttpServlet {
         String like = req.getParameter("like");
         if (like != null) {
             serviceUsers.addLiked(user);
-        } else serviceUsers.addAgain(user);
+        } else {
+            serviceUsers.addAgain(user);
+        }
         resp.sendRedirect("/users");
     }
 }
