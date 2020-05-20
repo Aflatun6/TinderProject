@@ -60,4 +60,21 @@ public class DAOuserSQL {
         pr.setInt(2, whom);
         pr.executeUpdate();
     }
+
+    public ResultSet getMessages(int who, int whom) throws SQLException {
+        String sql = "select * from messages where who = ? and whom = ?";
+        PreparedStatement pr = conn.prepareStatement(sql);
+        pr.setInt(1, who);
+        pr.setInt(2, whom);
+        return pr.executeQuery();
+    }
+
+    public void addMessage(int who, int whom, String content) throws SQLException {
+        String sql = "insert into messages(who,whom,content,date) values (?,?,?,default)";
+        PreparedStatement pr = conn.prepareStatement(sql);
+        pr.setInt(1, who);
+        pr.setInt(2, whom);
+        pr.setString(1, content);
+        pr.executeUpdate();
+    }
 }
