@@ -9,6 +9,12 @@ import java.io.*;
 import java.util.stream.Collectors;
 
 public class MessagesServlet extends HttpServlet {
+    private final TemplateEngine engine;
+
+    public MessagesServlet(TemplateEngine engine){
+        this.engine = engine;
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String pathInfo = req.getPathInfo().split("/")[1];
