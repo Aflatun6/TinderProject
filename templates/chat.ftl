@@ -50,7 +50,7 @@
                     <ul class="p-0">
                         <li class="send-msg float-right mb-2">
                             <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
-                                %{message2}
+                                ${message2}
                             </p>
                         </li>
                         <li class="receive-msg float-left mb-2">
@@ -59,9 +59,9 @@
                             </div>
                             <div class="receive-msg-desc float-left ml-2">
                                 <p class="bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded">
-                                    %{message1}
+                                    ${message1}
                                 </p>
-                                <span class="receive-msg-time">%{name}, %{date}</span>
+                                <span class="receive-msg-time">${name}, ${date}</span>
                             </div>
                         </li>
                         <!--                        <li class="send-msg float-right mb-2">-->

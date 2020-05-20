@@ -26,6 +26,7 @@ public class MessagesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         whom = Integer.parseInt(req.getPathInfo().split("/")[1]);
         HashMap<String, Object> data = new HashMap<>();
-        engine.render("templates/chat.ftl", data, resp);
+        data.put("name","Christina");//  ERRORS ARE BECAUSE WE DIDN'T COVERED THE VARIABLES IN CHAT.FTL
+        engine.render("chat.ftl", data, resp);
     }
 }
