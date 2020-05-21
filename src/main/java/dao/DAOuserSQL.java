@@ -70,11 +70,11 @@ public class DAOuserSQL {
     }
 
     public void addMessage(int who, int whom, String content) throws SQLException {
-        String sql = "insert into messages(who,whom,content,date) values (?,?,?,default)";
+        String sql = "insert into public.messages(id, who, whom, content, date) values (default, ?, ?, ?, default)";
         PreparedStatement pr = conn.prepareStatement(sql);
         pr.setInt(1, who);
         pr.setInt(2, whom);
-        pr.setString(1, content);
+        pr.setString(3, content);
         pr.executeUpdate();
     }
 }

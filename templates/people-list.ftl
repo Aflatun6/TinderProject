@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-outline-danger align-self-center" href="/login">Logout</a>
+    <a class="btn btn-outline-danger align-self-center" href="/logout">Logout</a>
 </div>
 </body>
 </html>

@@ -13,8 +13,13 @@ import java.time.ZonedDateTime;
 @Setter
 @EqualsAndHashCode
 public class Message {
+    private final int id;
     private final int who;
     private final int whom;
     private final String content;
     private final Timestamp date;
+
+    public String goodDate(){
+        return date.toString();
+    }
 }

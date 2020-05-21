@@ -19,7 +19,9 @@ public class LogoutServlet extends HttpServlet {
             if(c.getName().equals(CurrentState.getCurrentUser().getName())){
                 c.setMaxAge(0);
                 resp.addCookie(c);
+//                CurrentState.setCurrentUser(null);
             }
         }
+        resp.sendRedirect("/login");
     }
 }

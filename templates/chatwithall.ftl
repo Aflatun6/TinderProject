@@ -25,7 +25,7 @@
                 <div class="row header-one text-white p-1">
                     <div class="col-md-6 name pl-2">
                         <i class="fa fa-comment"></i>
-                        <h6 class="ml-1 mb-0">${name}</h6>
+                        <h6 class="ml-1 mb-0">${name}${whom}</h6>
                     </div>
                     <div class="col-md-6 options text-right pr-0">
                         <i class="fa fa-window-minimize hide-chat-box hover text-center pt-1"></i>
@@ -49,25 +49,26 @@
                 <div class="chat-content">
                     <div class="col-md-12 chats pt-3 pl-2 pr-3 pb-3">
                         <ul class="p-0">
-                            <#list messagesFromMe as messageFromMe>
-                                <li class="send-msg float-right mb-2">
-                                    <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
-                                        ${messageFromMe.content}
-                                    </p>
-                                </li>
-                            </#list>
-                            <#list messagesToMe as messageToMe>
-                                <li class="receive-msg float-left mb-2">
-                                    <div class="sender-img">
-                                        <img src="${imageurl}" class="float-left">
-                                    </div>
-                                    <div class="receive-msg-desc float-left ml-2">
-                                        <p class="bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded">
-                                            ${messageToMe.content}
+                            <#list messages as message>
+                                <#if message.whom == whom >
+                                    <li class="send-msg float-right mb-2">
+                                        <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
+                                            ${message.content}
                                         </p>
-                                        <span class="receive-msg-time">${messageToMe.goodDate()}</span>
-                                    </div>
-                                </li>
+                                    </li>
+                                <#else>
+                                    <li class="receive-msg float-left mb-2">
+                                        <div class="sender-img">
+                                            <img src="${imageurl}" class="float-left">
+                                        </div>
+                                        <div class="receive-msg-desc float-left ml-2">
+                                            <p class="bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded">
+                                                ${message.content}
+                                            </p>
+                                            <span class="receive-msg-time">${message.goodDate()}</span>
+                                        </div>
+                                    </li>
+                                </#if>
                             </#list>
                             <!--                        <li class="send-msg float-right mb-2">-->
                             <!--                            <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">-->

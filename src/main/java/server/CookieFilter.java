@@ -18,11 +18,16 @@ public class CookieFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (isHTTP(servletRequest, servletResponse) && isRequestValid((HttpServletRequest) servletRequest))
             filterChain.doFilter(servletRequest, servletResponse);
+        if (!isRequestValid((HttpServletRequest) servletRequest)) {
+            HttpServletResponse resp = (HttpServletResponse) servletResponse;
+            resp.sendRedirect("/login");
+        }
     }
 
     private boolean isRequestValid(HttpServletRequest servletRequest) {
         Cookie[] cookies = servletRequest.getCookies();
         if (cookies == null) return false;
+        if(CurrentState.getCurrentUser() == null) return false;
         for (Cookie c : cookies) {
             if (c.getName().equals(CurrentState.getCurrentUser().getName()) && c.getValue().equals(CurrentState.getCurrentUser().getPassword())) {
                 return true;

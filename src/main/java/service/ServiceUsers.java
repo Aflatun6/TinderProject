@@ -20,6 +20,19 @@ public class ServiceUsers {
         dao = new DAOuserSQL();
     }
 
+    public User get(int id) throws SQLException {
+        ResultSet rs = dao.get(id);
+        if (rs.next()) {
+            return new User(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("imageurl"),
+                    rs.getString("password")
+            );
+        }
+        return null; // Don't think there would be!
+    }
+
     public void getAll() throws SQLException {
         CurrentState.setUsers(makeUsers(dao.getAll()));
         doMath();
