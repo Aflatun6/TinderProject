@@ -29,10 +29,10 @@ public class UsersServlet extends HttpServlet {
         if (user != null) {
             HashMap<String, Object> data = new HashMap<>();
             String name = user.getName();
-            String imageURL = user.getImageURL();
+            String imageurl = user.getImageURL();
             data.put("name", name);
-            data.put("imageURL", imageURL);
-            engine.render("like-page.html", data, resp);
+            data.put("imageurl", imageurl);
+            engine.render("like-page.ftl", data, resp);
         } else {
             resp.sendRedirect("/liked");
         }

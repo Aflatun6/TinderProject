@@ -34,10 +34,8 @@ public class SignUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        String imageURL = req.getParameter("imageURL");
-        Cookie cookie = new Cookie(name, password);
-        resp.addCookie(cookie);
-        service.add(name,imageURL,password);
+        String imageurl = req.getParameter("imageurl");
+        service.add(name,imageurl,password);
         resp.sendRedirect("/login");
     }
 }

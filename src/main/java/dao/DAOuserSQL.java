@@ -36,11 +36,11 @@ public class DAOuserSQL {
         return pr.executeQuery();
     }
 
-    public void add(String name, String imageURL, String password) throws SQLException {
+    public void add(String name, String imageurl, String password) throws SQLException {
         String sql = "insert into public.users (id,name,imageurl,password) values (default,?, ?, ?)";
         PreparedStatement pr = conn.prepareStatement(sql);
         pr.setString(1, name);
-        pr.setString(2, imageURL);
+        pr.setString(2, imageurl);
         pr.setString(3, password);
         pr.executeUpdate();
     }

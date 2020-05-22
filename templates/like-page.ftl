@@ -24,7 +24,7 @@
             <form method="post" action="users">
                 <div class="row">
                     <div class="col-12 col-lg-12 col-md-12 text-center">
-                        <img src="${imageURL}" alt=""
+                        <img src="${imageurl}" alt=""
                              class="mx-auto rounded-circle img-fluid">
                         <h3 class="mb-0 text-truncated">${name}</h3>
                         <br>

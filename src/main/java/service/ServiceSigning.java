@@ -15,8 +15,8 @@ public class ServiceSigning {
         dao = new DAOuserSQL();
     }
 
-    public void add(String name, String imageURL, String password) throws SQLException {
-        dao.add(name, imageURL, password);
+    public void add(String name, String imageurl, String password) throws SQLException {
+        dao.add(name, imageurl, password);
     }
 
     public boolean exist(String name, String password) throws SQLException {

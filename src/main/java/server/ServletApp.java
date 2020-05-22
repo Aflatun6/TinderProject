@@ -12,7 +12,7 @@ public class ServletApp {
         DbSetup.migrate(
                 "jdbc:postgresql://ec2-54-228-251-117.eu-west-1.compute.amazonaws.com:5432/d1h69thpfb2nha",
                 "slwfzdunpgpvgz",
-                "cf9a4a0e54c459192e02bd52e65896245e749fd9d939065dc1a96ecf056042fe"
+                "cf9a4a0e54c459192e02bd52e65896245e749fd9d939065dc1a96ecf056042fe",true
         );
 
         EnumSet<DispatcherType> ft = EnumSet.of(DispatcherType.REQUEST);

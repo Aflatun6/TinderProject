@@ -39,12 +39,8 @@ public class MessagesServlet extends HttpServlet {
         String s = req.getPathInfo().substring(1);
         whom = Integer.parseInt(s);
         User userwhom = serviceUsers.get(whom);
-        List<Message> messagesFromMe = service.getMessagesFromMe(whom);
-        List<Message> messagesToMe = service.getMessagesToMe(whom);
         List<Message> all = service.getAll(whom);
         HashMap<String, Object> data = new HashMap<>();
-//        data.put("messagesFromMe", messagesFromMe);
-//        data.put("messagesToMe", messagesToMe);
         data.put("messages", all);
         data.put("whom", whom);
         data.put("name", userwhom.getName());
