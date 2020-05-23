@@ -16,13 +16,13 @@ All students will work on this project in groups of three persons. Group members
 
 ## Suggested order of tasks execution (you are not required to follow it):
 1. Create a new Maven app. Add required dependencies
-2. Launch Jetty web-server
+2. Launch Jetty web-org.avelibeyli.tinder.server
 3. Create a test servlet which will output simple message 'Hello world' in the browser window
 4. Map the test servlet to the "/users" path
 5. Output a static HTML page with four elements - name, photo (a link to any picture from the web) and two buttons - Yes/No when requesting the "/users" path
 6. Wrap the page in an HTML form
-7. When a Yes/No button is pressed - send a POST request to the server (there is no handler there at the moment)
-8. Add POST request handler on the server and store the user's choice (yes or no) on the server (in any form)
+7. When a Yes/No button is pressed - send a POST request to the org.avelibeyli.tinder.server (there is no handler there at the moment)
+8. Add POST request handler on the org.avelibeyli.tinder.server and store the user's choice (yes or no) on the org.avelibeyli.tinder.server (in any form)
 9. The doPost method should forward the request to the "/users" GET path
 10. Create a few profiles (name + link to a picture from the web)
 11. When a Yes/No button is pressed - show the next profile, the picture and name on the page should change
@@ -37,7 +37,7 @@ All students will work on this project in groups of three persons. Group members
 20. Connect app to MySQL/PostgreSQL database (local or remote)
 21. Write a new implementation of the DAO classes so that all the users are stored in the database
 22. Show real messages between users on the "/messages/{id}" page
-23. Add a possibility to make a POST request on the server with a new message on this page
+23. Add a possibility to make a POST request on the org.avelibeyli.tinder.server with a new message on this page
 24. Create a doPost method in the corresponding servlet, which will save the new message to the database
 25. Add a simple login page to the "/login" path
 26. Use Bootstrap templates as a base for all webpages
